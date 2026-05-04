@@ -1,37 +1,41 @@
 :root {
-  --background: 0 0% 98%;
+  /* Refined BYJU'S Inspired Palette */
+  --background: 0 0% 100%;
   --foreground: 240 10% 10%;
   --card: 0 0% 100%;
   --card-foreground: 240 10% 10%;
-  --primary: 262.1 83.3% 57.8%;
+  
+  --primary: 271 70% 50%;      /* Byju's Purple */
   --primary-foreground: 210 20% 98%;
-  --secondary: 199 89% 48%; /* Electric Blue */
-  --accent: 330 81% 60%;    /* Vibrant Pink */
+  
+  --secondary: 45 93% 47%;    /* Action Yellow */
+  --secondary-foreground: 240 10% 3.9%;
+  
+  --accent: 142 71% 45%;       /* Success Green */
+  --accent-foreground: 210 20% 98%;
+
   --muted: 240 4.8% 95.9%;
   --border: 240 5.9% 90%;
-  --radius: 1.5rem;
+  --radius: 1.25rem;
 
-  /* Student Aesthetic Colors */
-  --soft-purple: 270 70% 94%;
-  --soft-blue: 200 70% 94%;
-  --soft-pink: 330 70% 94%;
-  --soft-yellow: 45 90% 92%;
+  /* Grade Specific Soft Tones */
+  --grade-primary: 270 70% 96%;
+  --grade-secondary: 45 90% 96%;
+  --grade-accent: 142 70% 96%;
   
-  --sticker-shadow: 0 4px 0 rgba(0,0,0,0.05);
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 24px rgba(128, 49, 167, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 6%;
-    --primary: 263.4 70% 50.4%;
-    --secondary: 199 89% 48%;
-    --accent: 330 81% 60%;
-    --soft-purple: 270 30% 15%;
-    --soft-blue: 200 30% 15%;
-    --soft-pink: 330 30% 15%;
-    --soft-yellow: 45 30% 15%;
+    --card: 240 10% 7%;
+    --primary: 271 60% 60%;
+    --secondary: 45 93% 47%;
+    --grade-primary: 270 30% 12%;
   }
 }
 
@@ -39,100 +43,78 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: 'Outfit', 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(var(--primary), 0.05) 0, transparent 50%),
-    radial-gradient(at 50% 0%, hsla(var(--secondary), 0.05) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(var(--accent), 0.05) 0, transparent 50%);
 }
 
-/* Sticker Style Component */
-.sticker {
-  background: white;
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  border: 3px solid white;
-  box-shadow: var(--sticker-shadow);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transform: rotate(-2deg);
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.outfit {
+  font-family: 'Outfit', sans-serif;
 }
 
-.sticker:hover {
-  transform: rotate(2deg) scale(1.1);
-}
-
-/* Scrapbook Card */
-.scrapbook-card {
+/* BYJU'S Style Card */
+.byju-card {
   background: hsl(var(--card));
   border-radius: var(--radius);
+  padding: 1.5rem;
   border: 1px solid hsl(var(--border));
-  padding: 2rem;
-  position: relative;
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.scrapbook-card::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+.byju-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: hsl(var(--primary) / 0.2);
 }
 
-/* Interactive Milestone Line */
-.milestone-line {
-  position: relative;
-  padding-left: 3rem;
+/* Action Button */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(45 93% 55%), hsl(35 93% 50%));
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 100px;
+  font-weight: 800;
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 
-.milestone-line::before {
-  content: '';
-  position: absolute;
-  left: 1rem;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 10px,
-    hsl(var(--border)) 10px,
-    hsl(var(--border)) 20px
-  );
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4);
 }
 
-/* Animations */
-@keyframes bounce-subtle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+/* Section Header */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: hsl(var(--primary));
+  margin-bottom: 1.5rem;
 }
 
-.animate-bounce-subtle {
-  animation: bounce-subtle 3s ease-in-out infinite;
+/* Badge */
+.badge-grade {
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: hsl(var(--grade-primary));
+  color: hsl(var(--primary));
 }
 
-/* Typography Gradient */
-.text-student {
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Sticker Overrides for a cleaner look */
+.sticker {
+  background: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.75rem;
+  border: 2px solid hsl(var(--primary) / 0.1);
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: var(--shadow-sm);
 }
