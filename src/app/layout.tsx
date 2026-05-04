@@ -27,16 +27,15 @@ export default function RootLayout({
             </span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="/" className="text-sm font-medium hover:text-purple-400 transition-colors">Dashboard</a>
-            <a href="/projects" className="text-sm font-medium hover:text-purple-400 transition-colors">Explore Projects</a>
-            <a href="/studio" className="text-sm font-medium hover:text-purple-400 transition-colors">Krushiv Studio</a>
+            <a href="/dashboard" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Dashboard</a>
+            <a href="/projects/sustainable-city" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Project Lab</a>
+            <a href="/studio" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Krushiv Studio</a>
           </div>
-          <a href="/auth" className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium hover:bg-white/10 transition-all group">
-            <div className="w-6 h-6 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-[10px] group-hover:scale-110 transition-transform">
-              👤
-            </div>
-            <span>Sign In</span>
-          </a>
+          <div className="flex items-center gap-4">
+            <a href="/auth" className="flex items-center gap-3 px-6 py-3 rounded-full bg-foreground text-background text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
+              Sign In
+            </a>
+          </div>
         </nav>
         <main className="pt-24 pb-20 min-h-screen">
           {children}
