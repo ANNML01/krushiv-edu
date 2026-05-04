@@ -1,15 +1,9 @@
 import Image from "next/image";
+import { sampleProjects } from "./data/projects";
 
 export default function Home() {
-  const activeProjects = [
-    { id: 1, title: "Social Issues in India", type: "Social Science", progress: 65, color: "var(--soft-purple)", emoji: "🌏" },
-    { id: 2, title: "Hydraulic Arm Model", type: "Physics", progress: 30, color: "var(--soft-blue)", emoji: "⚙️" },
-  ];
-
-  const trendingTemplates = [
-    { id: 3, title: "Biodiversity of Western Ghats", level: "Class 12", subject: "Biology", rating: 4.8, emoji: "🌿" },
-    { id: 4, title: "Consumer Rights Awareness", level: "Class 10", subject: "Economics", rating: 4.9, emoji: "⚖️" },
-  ];
+  const activeProjects = sampleProjects.filter(p => p.progress > 0 && p.progress < 100);
+  const trendingTemplates = sampleProjects.filter(p => p.progress === 0);
 
   const mentors = [
     { id: 1, name: "Dr. Ananya", subject: "Physics", rating: 4.9, emoji: "👩‍🏫" },
@@ -60,11 +54,11 @@ export default function Home() {
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 grid md:grid-cols-2 gap-8">
             {activeProjects.map(project => (
-              <div key={project.id} className="scrapbook-card group cursor-pointer hover:shadow-2xl transition-all" style={{ backgroundColor: project.color }}>
+              <a href={`/projects/${project.id}`} key={project.id} className="scrapbook-card group cursor-pointer hover:shadow-2xl transition-all" style={{ backgroundColor: project.color }}>
                 <div className="flex justify-between items-start mb-6">
                   <div className="text-4xl">{project.emoji}</div>
                   <div className="sticker text-[10px] bg-white text-black">
-                    {project.type}
+                    {project.subject}
                   </div>
                 </div>
                 <h3 className="text-2xl font-black mb-6 group-hover:text-primary transition-colors">{project.title}</h3>
@@ -77,7 +71,7 @@ export default function Home() {
                     <div className="h-full bg-foreground transition-all duration-1000" style={{ width: `${project.progress}%` }}></div>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           
@@ -113,15 +107,15 @@ export default function Home() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {trendingTemplates.map(template => (
-            <div key={template.id} className="scrapbook-card hover:scale-105 transition-all bg-white">
+            <a href={`/projects/${template.id}`} key={template.id} className="scrapbook-card hover:scale-105 transition-all bg-white">
               <div className="text-3xl mb-4">{template.emoji}</div>
               <h4 className="font-black text-lg mb-2">{template.title}</h4>
               <p className="text-[10px] font-bold text-primary mb-4">{template.subject} • {template.level}</p>
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-black opacity-40">⭐ {template.rating}</span>
+                <span className="text-[10px] font-black opacity-40">⭐ 4.8</span>
                 <button className="w-8 h-8 rounded-full bg-soft-blue flex items-center justify-center text-xs">🔍</button>
               </div>
-            </div>
+            </a>
           ))}
           <div className="scrapbook-card border-dashed flex flex-col items-center justify-center text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer">
             <div className="text-3xl mb-4">✨</div>
