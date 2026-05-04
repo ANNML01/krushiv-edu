@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function KrushivBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', text: "Namaste! I'm Krushiv. How can I help you with your project today?" }
+    { role: 'assistant', text: "Hey! I'm Krushiv, your project buddy. Ready to make something awesome today?" }
   ]);
   const [input, setInput] = useState("");
 
@@ -16,7 +16,7 @@ export default function KrushivBot() {
     
     // Simulate AI response
     setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'assistant', text: "That's a great question! For CBSE projects, I recommend focusing on the Methodology section first. Would you like me to generate a template for that?" }]);
+      setMessages(prev => [...prev, { role: 'assistant', text: "Ooh, interesting! I checked the CBSE 2026 rubrics, and adding a 'Societal Impact' section could boost your internal marks by 15%. Want me to draft a structure?" }]);
     }, 1000);
   };
 
@@ -25,30 +25,30 @@ export default function KrushivBot() {
       {/* Toggle Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-24 right-8 z-[100] w-14 h-14 rounded-2xl bg-gradient shadow-2xl flex items-center justify-center text-3xl animate-float hover:scale-110 transition-transform"
+        className="fixed bottom-24 right-8 z-[100] w-16 h-16 rounded-[2rem] bg-primary shadow-2xl flex items-center justify-center text-4xl animate-bounce-subtle hover:scale-110 transition-transform border-4 border-white"
       >
         🤖
       </button>
 
-      {/* Chat Window */}
+      {/* Chat Window - Scrapbook Style */}
       {isOpen && (
-        <div className="fixed bottom-40 right-8 z-[100] w-80 md:w-96 glass-card border border-white/10 rounded-3xl overflow-hidden shadow-2xl animate-in slide-in-from-bottom-10">
-          <div className="p-6 bg-gradient flex items-center justify-between">
+        <div className="fixed bottom-44 right-8 z-[100] w-80 md:w-96 scrapbook-card bg-white border-none shadow-2xl overflow-hidden animate-in slide-in-from-bottom-10 flex flex-col p-0">
+          <div className="p-6 bg-primary text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-2xl">🤖</span>
+              <span className="text-3xl">🤖</span>
               <div>
-                <h3 className="font-bold outfit leading-none">Krushiv AI</h3>
-                <span className="text-[10px] opacity-70 uppercase tracking-widest font-bold">Educational Agent</span>
+                <h3 className="font-black outfit leading-none">Krushiv AI</h3>
+                <span className="text-[10px] opacity-70 uppercase tracking-widest font-black">Online & Ready</span>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="opacity-50 hover:opacity-100">✕</button>
+            <button onClick={() => setIsOpen(false)} className="font-black text-xl hover:scale-110 transition-transform">✕</button>
           </div>
           
-          <div className="h-96 p-6 overflow-y-auto space-y-4 bg-background/50">
+          <div className="h-80 p-6 overflow-y-auto space-y-4 bg-[#fdfcf0]/30 no-scrollbar">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-4 rounded-2xl text-sm ${
-                  m.role === 'user' ? 'bg-purple-500/20 border border-purple-500/30' : 'glass border border-white/10'
+                <div className={`max-w-[85%] p-4 rounded-2xl text-sm font-bold shadow-sm ${
+                  m.role === 'user' ? 'bg-soft-purple text-primary border-2 border-primary/10' : 'bg-white border-2 border-foreground/5'
                 }`}>
                   {m.text}
                 </div>
@@ -56,17 +56,17 @@ export default function KrushivBot() {
             ))}
           </div>
 
-          <div className="p-4 glass border-t border-white/10 flex gap-2">
+          <div className="p-4 bg-white border-t border-foreground/5 flex gap-2">
             <input 
               type="text" 
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-              placeholder="Ask anything about your project..." 
-              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-purple-500/50"
+              placeholder="Type your question..." 
+              className="flex-1 bg-muted/50 rounded-2xl px-5 py-3 text-sm font-bold outline-none focus:bg-white focus:ring-2 ring-primary/20 transition-all"
             />
-            <button onClick={sendMessage} className="p-2 rounded-xl bg-purple-500 text-sm">
-              ➤
+            <button onClick={sendMessage} className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center font-black hover:scale-105 transition-all">
+              ➔
             </button>
           </div>
         </div>
