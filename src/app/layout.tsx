@@ -33,6 +33,7 @@ export default function RootLayout({
             </span>
           </div>
           <div className="hidden md:flex items-center gap-12 flex-shrink-0">
+            <a href="/" className="text-xs font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-all">Home</a>
             <a href="/dashboard" className="text-xs font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-all">Dashboard</a>
             <a href="/projects/sustainable-city" className="text-xs font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-all">Laboratory</a>
             <a href="/studio" className="text-xs font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-all">Studio</a>
