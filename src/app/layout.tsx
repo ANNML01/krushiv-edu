@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import KrushivBot from "@/components/KrushivBot";
+import { PageTransition } from "@/components/Animations";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -43,7 +44,9 @@ export default function RootLayout({
           </div>
         </nav>
         <main className="pt-24 pb-20 min-h-screen">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
         
         <KrushivBot />

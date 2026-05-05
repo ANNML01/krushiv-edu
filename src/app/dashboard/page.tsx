@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { usePersona, Persona } from "../context/PersonaContext";
 import { sampleProjects } from "../data/projects";
+import { StaggerContainer, StaggerItem } from "@/components/Animations";
+import { motion } from "framer-motion";
 
 export default function DashboardPage() {
   const { persona, setPersona } = usePersona();
@@ -50,28 +52,31 @@ function StudentDashboard() {
           <h2 className="text-4xl font-black outfit">Active Laboratory</h2>
           <button className="btn-organic py-3 px-8 text-sm">New Seed</button>
         </div>
+        <StaggerContainer>
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 grid md:grid-cols-2 gap-8">
             {activeProjects.map(project => (
-              <a href={`/projects/${project.id}`} key={project.id} className="editorial-card group hover:bg-white transition-all">
-                <div className="flex justify-between items-start mb-12">
-                  <div className="text-5xl group-hover:scale-110 transition-transform">{project.emoji}</div>
-                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary">{project.subject}</div>
-                </div>
-                <h3 className="text-3xl font-black mb-8 leading-tight">{project.title}</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between text-[10px] font-black opacity-30 uppercase tracking-widest">
-                    <span>Maturity</span>
-                    <span>{project.progress}%</span>
+              <StaggerItem key={project.id}>
+                <a href={`/projects/${project.id}`} className="editorial-card group hover:bg-white transition-all block">
+                  <div className="flex justify-between items-start mb-12">
+                    <div className="text-5xl group-hover:scale-110 transition-transform">{project.emoji}</div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary">{project.subject}</div>
                   </div>
-                  <div className="h-1 w-full bg-muted rounded-full overflow-hidden">
-                    <div className="h-full bg-primary transition-all duration-1000" style={{ width: `${project.progress}%` }}></div>
+                  <h3 className="text-3xl font-black mb-8 leading-tight">{project.title}</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between text-[10px] font-black opacity-30 uppercase tracking-widest">
+                      <span>Maturity</span>
+                      <span>{project.progress}%</span>
+                    </div>
+                    <div className="h-1 w-full bg-muted rounded-full overflow-hidden">
+                      <div className="h-full bg-primary transition-all duration-1000" style={{ width: `${project.progress}%` }}></div>
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </StaggerItem>
             ))}
           </div>
-          <div className="lg:col-span-1">
+          <StaggerItem>
              <div className="editorial-card bg-primary text-white border-none h-full flex flex-col justify-between">
                 <div className="space-y-6">
                    <div className="text-4xl">🤖</div>
@@ -82,8 +87,9 @@ function StudentDashboard() {
                 </div>
                 <button className="w-full py-4 rounded-2xl bg-white text-primary font-black text-sm hover:scale-105 transition-all">Review Insight</button>
              </div>
-          </div>
+          </StaggerItem>
         </div>
+        </StaggerContainer>
       </section>
     </div>
   );
