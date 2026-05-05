@@ -1,23 +1,42 @@
 "use client";
 
 import { useState } from "react";
+import { usePersona } from "../app/context/PersonaContext";
 
 export default function KrushivBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const { persona } = usePersona();
   const [messages, setMessages] = useState([
-    { role: 'assistant', text: "Hey! I'm Krushiv, your project buddy. Ready to make something awesome today?" }
+    { role: 'assistant', text: `Hey! I'm Krushiv AI. As your ${persona} buddy, I'm here to help you excel. Ready to build something awesome?` }
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
-    setMessages([...messages, { role: 'user', text: input }]);
-    setInput("");
+  const sendMessage = async () => {
+    if (!input.trim() || isLoading) return;
     
-    // Simulate AI response
-    setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'assistant', text: "Ooh, interesting! I checked the CBSE 2026 rubrics, and adding a 'Societal Impact' section could boost your internal marks by 15%. Want me to draft a structure?" }]);
-    }, 1000);
+    const userMessage = { role: 'user', text: input };
+    setMessages(prev => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input, persona, userId: "anil_demo" })
+      });
+
+      const data = await response.json();
+      if (data.text) {
+        setMessages(prev => [...prev, { role: 'assistant', text: data.text }]);
+      }
+    } catch (error) {
+      console.error("Chat error:", error);
+      setMessages(prev => [...prev, { role: 'assistant', text: "Sorry, I'm having a bit of trouble connecting to my academic grid. Try again?" }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -54,19 +73,35 @@ export default function KrushivBot() {
                 </div>
               </div>
             ))}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-white border-2 border-foreground/5 p-4 rounded-2xl animate-pulse">
+                  <span className="flex gap-1">
+                    <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce"></span>
+                    <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                    <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="p-4 bg-white border-t border-foreground/5 flex gap-2">
             <input 
               type="text" 
               value={input}
+              disabled={isLoading}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-              placeholder="Type your question..." 
-              className="flex-1 bg-muted/50 rounded-2xl px-5 py-3 text-sm font-bold outline-none focus:bg-white focus:ring-2 ring-primary/20 transition-all"
+              placeholder={isLoading ? "Krushiv is thinking..." : "Type your question..."} 
+              className="flex-1 bg-muted/50 rounded-2xl px-5 py-3 text-sm font-bold outline-none focus:bg-white focus:ring-2 ring-primary/20 transition-all disabled:opacity-50"
             />
-            <button onClick={sendMessage} className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center font-black hover:scale-105 transition-all">
-              ➔
+            <button 
+              onClick={sendMessage} 
+              disabled={isLoading}
+              className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center font-black hover:scale-105 transition-all disabled:opacity-50"
+            >
+              {isLoading ? "..." : "➔"}
             </button>
           </div>
         </div>
