@@ -19,20 +19,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable}`}>
-        <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10 px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg animate-pulse-glow" style={{ background: 'linear-gradient(135deg, hsl(var(--krushiv-purple)), hsl(var(--krushiv-pink)))' }}></div>
-            <span className="text-xl font-bold tracking-tight outfit" style={{ fontFamily: 'var(--font-outfit)' }}>
+        <nav className="fixed top-0 left-0 right-0 z-[100] glass px-6 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl animate-pulse-glow flex items-center justify-center text-xl" style={{ background: 'linear-gradient(135deg, hsl(var(--krushiv-purple)), hsl(var(--krushiv-pink)))' }}>
+              🌿
+            </div>
+            <span className="text-2xl font-black tracking-tighter outfit text-foreground">
               Krushiv <span className="text-gradient">Edu</span>
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-8">
-            <a href="/dashboard" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Dashboard</a>
-            <a href="/projects/sustainable-city" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Project Lab</a>
-            <a href="/studio" className="text-sm font-black uppercase tracking-widest hover:text-primary transition-colors">Krushiv Studio</a>
+          <div className="hidden md:flex items-center gap-10">
+            <a href="/dashboard" className="text-xs font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-colors">Dashboard</a>
+            <a href="/projects/sustainable-city" className="text-xs font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-colors">Laboratory</a>
+            <a href="/studio" className="text-xs font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-primary transition-colors">Studio</a>
           </div>
           <div className="flex items-center gap-4">
-            <a href="/auth" className="flex items-center gap-3 px-6 py-3 rounded-full bg-foreground text-background text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
+            <a href="/auth" className="btn-organic py-3 px-8 text-xs">
               Sign In
             </a>
           </div>
