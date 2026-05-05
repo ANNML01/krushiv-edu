@@ -1,41 +1,33 @@
 :root {
-  /* Refined BYJU'S Inspired Palette */
-  --background: 0 0% 100%;
-  --foreground: 240 10% 10%;
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 10%;
+  /* Light Olive Organic Palette */
+  --background: 80 20% 97%;   /* Light Olive / Creamy Green */
+  --foreground: 120 10% 15%;  /* Deep Forest Green-Black */
+  --card: 80 15% 99%;
+  --card-foreground: 120 10% 15%;
   
-  --primary: 271 70% 50%;      /* Byju's Purple */
-  --primary-foreground: 210 20% 98%;
+  --primary: 142 45% 30%;      /* Forest Green */
+  --primary-foreground: 80 20% 97%;
   
-  --secondary: 45 93% 47%;    /* Action Yellow */
-  --secondary-foreground: 240 10% 3.9%;
+  --secondary: 25 60% 45%;     /* Earthy Terracotta */
+  --secondary-foreground: 80 20% 97%;
   
-  --accent: 142 71% 45%;       /* Success Green */
-  --accent-foreground: 210 20% 98%;
+  --accent: 45 93% 47%;        /* Sunlight Yellow */
+  --accent-foreground: 240 10% 3.9%;
 
-  --muted: 240 4.8% 95.9%;
-  --border: 240 5.9% 90%;
-  --radius: 1.25rem;
+  --muted: 80 10% 92%;
+  --border: 80 10% 88%;
+  --radius: 1.5rem;
 
-  /* Grade Specific Soft Tones */
-  --grade-primary: 270 70% 96%;
-  --grade-secondary: 45 90% 96%;
-  --grade-accent: 142 70% 96%;
-  
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 12px 24px rgba(128, 49, 167, 0.12);
+  /* Organic Textures */
+  --shadow-organic: 0 10px 30px -10px rgba(45, 60, 45, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 7%;
-    --primary: 271 60% 60%;
-    --secondary: 45 93% 47%;
-    --grade-primary: 270 30% 12%;
+    --background: 120 10% 5%;
+    --foreground: 80 20% 90%;
+    --card: 120 10% 8%;
+    --primary: 142 40% 50%;
   }
 }
 
@@ -50,71 +42,67 @@ body {
   color: hsl(var(--foreground));
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(at 100% 0%, hsla(142, 45%, 30%, 0.03) 0, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(25, 60%, 45%, 0.03) 0, transparent 50%);
 }
 
 .outfit {
   font-family: 'Outfit', sans-serif;
 }
 
-/* BYJU'S Style Card */
-.byju-card {
+/* Editorial Style Card */
+.editorial-card {
   background: hsl(var(--card));
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 2.5rem;
   border: 1px solid hsl(var(--border));
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-organic);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-.byju-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
-  border-color: hsl(var(--primary) / 0.2);
+.editorial-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 40px -15px rgba(45, 60, 45, 0.15);
 }
 
-/* Action Button */
-.btn-primary {
-  background: linear-gradient(135deg, hsl(45 93% 55%), hsl(35 93% 50%));
+/* Organic Button */
+.btn-organic {
+  background: hsl(var(--primary));
   color: white;
-  padding: 0.8rem 2rem;
+  padding: 1rem 2.5rem;
   border-radius: 100px;
   font-weight: 800;
-  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.btn-primary:hover {
+.btn-organic:hover {
+  background: hsl(var(--primary) / 0.9);
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* Section Header */
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: hsl(var(--primary));
-  margin-bottom: 1.5rem;
-}
-
-/* Badge */
-.badge-grade {
-  padding: 0.4rem 1rem;
-  border-radius: 100px;
+/* Section Label */
+.section-label {
   font-size: 0.75rem;
-  font-weight: 700;
-  background: hsl(var(--grade-primary));
-  color: hsl(var(--primary));
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: hsl(var(--secondary));
+  margin-bottom: 1rem;
+  display: block;
 }
 
-/* Sticker Overrides for a cleaner look */
-.sticker {
-  background: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.75rem;
-  border: 2px solid hsl(var(--primary) / 0.1);
-  font-weight: 700;
-  font-size: 0.8rem;
-  box-shadow: var(--shadow-sm);
+/* Typography Gradient */
+.text-organic {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
