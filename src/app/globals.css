@@ -33,13 +33,13 @@
 }
 
 body {
-  background-color: hsl(var(--background));
+  background-color: hsl(var(--background)) !important;
   color: hsl(var(--foreground));
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   background-image: 
-    radial-gradient(at 100% 0%, hsla(142, 45%, 30%, 0.03) 0, transparent 50%),
-    radial-gradient(at 0% 100%, hsla(25, 60%, 45%, 0.03) 0, transparent 50%);
+    radial-gradient(at 100% 0%, hsla(142, 45%, 30%, 0.05) 0, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(25, 60%, 45%, 0.05) 0, transparent 50%) !important;
 }
 
 .outfit {
