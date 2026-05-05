@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "A premium AI-powered platform for CBSE and educational projects.",
 };
 
+import { PersonaProvider } from "./context/PersonaContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${outfit.variable}`}>
-        <nav className="fixed top-0 left-0 right-0 z-[100] glass px-6 py-5 flex items-center justify-between">
+        <PersonaProvider>
+          <nav className="fixed top-0 left-0 right-0 z-[100] glass px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl animate-pulse-glow flex items-center justify-center text-xl" style={{ background: 'linear-gradient(135deg, hsl(var(--krushiv-purple)), hsl(var(--krushiv-pink)))' }}>
               🌿
@@ -60,6 +63,7 @@ export default function RootLayout({
             <span className="text-[10px] uppercase tracking-widest font-bold">Studio</span>
           </a>
         </nav>
+        </PersonaProvider>
       </body>
     </html>
   );
